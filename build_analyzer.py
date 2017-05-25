@@ -40,7 +40,10 @@ os.chdir( ".." )
 #specify the search paths/dependencies/options for gcc
 include_paths = [ "./AnalyzerSDK/include" ]
 link_paths = [ "./AnalyzerSDK/lib" ]
-link_dependencies = [ "-lAnalyzer" ] #refers to libAnalyzer.dylib or libAnalyzer.so
+if platform.system() == 'Linux' and platform.architecture()[0] == '64bit':
+    link_dependencies = ["-lAnalyzer64"]
+else:
+    link_dependencies = [ "-lAnalyzer" ] #refers to libAnalyzer.dylib or libAnalyzer.so
 
 debug_compile_flags = "-O0 -w -c -fpic -g"
 release_compile_flags = "-O3 -w -c -fpic"
